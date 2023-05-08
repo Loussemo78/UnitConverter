@@ -8,7 +8,6 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.unit.dp
 import com.example.unitconverter.data.ConversionResult
 
@@ -20,30 +19,35 @@ fun HistoryScreen(
     modifier: Modifier = Modifier
 ){
     Column {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "History",
-                color = Color.Gray
-            )
-            OutlinedButton(onClick = { onClearAllTask() }) {
-                Text(text = "Clear all",
+        if ((list.value).isNotEmpty()) {
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "History",
                     color = Color.Gray
                 )
-                
+                OutlinedButton(onClick = { onClearAllTask() }) {
+                    Text(
+                        text = "Clear all",
+                        color = Color.Gray
+                    )
+
+                }
             }
+
         }
 
-    }
+        HistoryList(
+            list = list,
+            onCloseTask = { item ->
+                onCloseTask(item)
+            }
+        )
 
-   HistoryList(
-       list = list,
-       onCloseTask ={item->
-           onCloseTask(item)
-       }
-   )
+    }
 }

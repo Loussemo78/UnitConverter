@@ -31,4 +31,10 @@ class ConvertViewModel(private val repository: ConverterRepository) : ViewModel(
             repository.deleteResult(item)
         }
     }
+
+    fun clearAll(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllResults()
+        }
+    }
 }

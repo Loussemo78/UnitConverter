@@ -32,7 +32,11 @@ fun BaseScreen(
         HistoryScreen(
             historyList,{item ->
             convertViewModel.removeResult(item)
-        })
+        },
+            {
+             convertViewModel.clearAll()
+            }
+        )
         
     }
 }
