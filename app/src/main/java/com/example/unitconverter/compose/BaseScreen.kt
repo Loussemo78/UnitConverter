@@ -9,11 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unitconverter.ConvertViewModel
+import com.example.unitconverter.ConverterViewModelFactory
 
 @Composable
 fun BaseScreen(
+    factory: ConverterViewModelFactory,
     modifier: Modifier = Modifier,
-    convertViewModel: ConvertViewModel = viewModel()
+    convertViewModel: ConvertViewModel = viewModel(factory = factory)
 
 ){
   val list = convertViewModel.getConversions()
