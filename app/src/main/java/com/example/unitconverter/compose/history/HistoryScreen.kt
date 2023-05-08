@@ -10,5 +10,7 @@ fun HistoryScreen(
     list: State<List<ConversionResult>>,
     modifier: Modifier = Modifier
 ){
-
+   HistoryList(
+       list = list, onCloseTask ={}
+   )
 }
