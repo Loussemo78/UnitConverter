@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [ConversionResult::class],version = 1)
 abstract class ConverterDataBase : RoomDatabase() {
 
-    abstract val converterDAO : ConverterDao
+    abstract val converterDao : ConverterDao
 
     companion object{
         @Volatile
