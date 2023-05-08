@@ -8,9 +8,13 @@ import com.example.unitconverter.data.ConversionResult
 @Composable
 fun HistoryScreen(
     list: State<List<ConversionResult>>,
+    onCloseTask : (ConversionResult) -> Unit,
     modifier: Modifier = Modifier
 ){
    HistoryList(
-       list = list, onCloseTask ={}
+       list = list,
+       onCloseTask ={item->
+           onCloseTask(item)
+       }
    )
 }
