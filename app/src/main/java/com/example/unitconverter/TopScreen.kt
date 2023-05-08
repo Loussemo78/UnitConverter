@@ -4,6 +4,6 @@ import androidx.compose.runtime.Composable
 
 
 @Composable
-fun TopScreen(){
+fun TopScreen(list: List<Conversion>) {
 
 }
