@@ -10,7 +10,10 @@ import java.text.DecimalFormat
 
 
 @Composable
-fun TopScreen(list: List<Conversion>) {
+fun TopScreen(
+    list: List<Conversion>,
+    save: (String,String) -> Unit
+) {
     val selectedConversion : MutableState<Conversion?> =  remember { mutableStateOf(null) }
 
     val inputText : MutableState<String> =  remember { mutableStateOf("") }
@@ -18,6 +21,7 @@ fun TopScreen(list: List<Conversion>) {
 
     ConversionMenu(list = list){
        selectedConversion.value = it
+        typedValue.value = "0.0"
     }
 
     selectedConversion.value?.let {
@@ -38,6 +42,7 @@ fun TopScreen(list: List<Conversion>) {
 
         val message1 = "${typedValue.value}  ${selectedConversion.value!!.convertFrom} is equal to"
         val message2 = "$roundedResult ${selectedConversion.value!!.convertTo}"
+        save(message1,message2)
         ResultBlock(message1 = message1, message2 = message2)
     }
 
