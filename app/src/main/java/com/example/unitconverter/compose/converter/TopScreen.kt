@@ -15,7 +15,6 @@ fun TopScreen(
     save: (String,String) -> Unit
 ) {
     val selectedConversion : MutableState<Conversion?> =  remember { mutableStateOf(null) }
-
     val inputText : MutableState<String> =  remember { mutableStateOf("") }
     val typedValue = remember { mutableStateOf("0.0") }
 
