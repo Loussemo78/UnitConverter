@@ -10,22 +10,5 @@ abstract class ConverterDataBase : RoomDatabase() {
 
     abstract val converterDao : ConverterDao
 
-    companion object{
-        @Volatile
-        private var INSTANCE : ConverterDataBase? = null
-        fun getInstance(context: Context):ConverterDataBase{
-            synchronized(this){
-                var instance = INSTANCE
-                if(instance==null){
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ConverterDataBase::class.java,
-                        "converter_data_database"
-                    ).build()
-                }
-                return instance
-            }
-        }
 
-    }
 }
