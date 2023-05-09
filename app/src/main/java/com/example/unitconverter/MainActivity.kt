@@ -11,13 +11,18 @@ import com.example.unitconverter.compose.BaseScreen
 import com.example.unitconverter.data.ConverterDataBase
 import com.example.unitconverter.data.ConverterRepositoryImpl
 import com.example.unitconverter.ui.theme.UnitConverterTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var factory : ConverterViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val dao = ConverterDataBase.getInstance(application).converterDao
-        val repository = ConverterRepositoryImpl(dao)
-        val factory = ConverterViewModelFactory(repository)
+
+
         setContent {
             UnitConverterTheme {
                 // A surface container using the 'background' color from the theme

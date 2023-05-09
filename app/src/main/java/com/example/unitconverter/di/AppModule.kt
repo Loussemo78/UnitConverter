@@ -3,6 +3,8 @@ package com.example.unitconverter.di
 import android.app.Application
 import androidx.room.Room
 import com.example.unitconverter.data.ConverterDataBase
+import com.example.unitconverter.data.ConverterRepository
+import com.example.unitconverter.data.ConverterRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +23,10 @@ object AppModule {
             ConverterDataBase::class.java,
             "converter_data_database"
         ).build()
+    }
+    @Provides
+    @Singleton
+    fun provideConverterRepository(db : ConverterDataBase) : ConverterRepository{
+        return ConverterRepositoryImpl(db.converterDao)
     }
 }
