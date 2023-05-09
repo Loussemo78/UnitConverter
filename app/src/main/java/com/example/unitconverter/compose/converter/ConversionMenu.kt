@@ -22,7 +22,11 @@ import com.example.unitconverter.data.Conversion
 
 
 @Composable
-fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier, convert : (Conversion) -> Unit){
+fun ConversionMenu(list: List<Conversion>,
+                   isLandscape : Boolean,
+                   modifier: Modifier = Modifier,
+                   convert : (Conversion) -> Unit)
+{
 
     var displayingText by rememberSaveable{ mutableStateOf("Select the conversion type")}
     var textFieldSize by remember{ mutableStateOf(Size.Zero) }//To assign the dropdown the same width as textField
@@ -33,23 +37,40 @@ fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier, conver
     else
         Icons.Filled.KeyboardArrowDown
   Column {
-      OutlinedTextField(
-          value = displayingText,
-          onValueChange = { displayingText = it },
-          textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
-          modifier = modifier
-              .fillMaxWidth()
-              .onGloballyPositioned { cordinates ->
-                  textFieldSize = cordinates.size.toSize()
+      if (isLandscape) {
+          OutlinedTextField(
+              value = displayingText,
+              onValueChange = { displayingText = it },
+              textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+              modifier = modifier
+                  .onGloballyPositioned { cordinates ->
+                      textFieldSize = cordinates.size.toSize()
+                  },
+              label = { Text(text = "Conversion type") },
+              trailingIcon = {
+                  Icon(icon, contentDescription = "icon",
+                      modifier.clickable { expanded = !expanded })
               },
-          label = { Text(text = "Conversion type") },
-          trailingIcon = {
-              Icon(icon, contentDescription = "icon",
-                  modifier.clickable { expanded = !expanded })
-          },
-          readOnly = true
-
-      )
+              readOnly = true
+          )
+      } else {
+          OutlinedTextField(
+              value = displayingText,
+              onValueChange = { displayingText = it },
+              textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+              modifier = modifier
+                  .fillMaxWidth()
+                  .onGloballyPositioned { cordinates ->
+                      textFieldSize = cordinates.size.toSize()
+                  },
+              label = { Text(text = "Conversion type") },
+              trailingIcon = {
+                  Icon(icon, contentDescription = "icon",
+                      modifier.clickable { expanded = !expanded })
+              },
+              readOnly = true
+          )
+      }
 
       DropdownMenu(
           expanded = expanded,
